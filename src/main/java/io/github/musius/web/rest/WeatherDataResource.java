@@ -70,7 +70,7 @@ public class WeatherDataResource {
     @RequestMapping(value = "/weatherData",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<WeatherData>> getAllWeatherDatas(Pageable pageable)
+    public ResponseEntity<List<WeatherData>> getAllWeatherData(Pageable pageable)
             throws URISyntaxException {
         Page<WeatherData> page = weatherDataRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/weatherData");

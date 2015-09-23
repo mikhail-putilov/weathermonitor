@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Service
-@Transactional
 public class WeatherCrawlerService {
     private final Logger log = LoggerFactory.getLogger(WeatherCrawlerService.class);
 
