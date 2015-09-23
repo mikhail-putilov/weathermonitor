@@ -1,0 +1,7 @@
+spring.velocity.checkTemplateLocation: false
+service.weather:
+  cities:
+    # [{city name}|,{country code}]   @see ISO 3166 country codes
+    - yekaterinburg
+    - chicago,il
+  fixed_delay_seconds: 200

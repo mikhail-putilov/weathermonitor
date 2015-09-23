@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "service.weather.cities",
+      "type": "java.lang.String",
+      "description": "List of cities for WeatherCrawlerService in following format: [{city name} | {city name},{country code}]. Use ISO 3166 country codes."
+    }
+  ]
+}
