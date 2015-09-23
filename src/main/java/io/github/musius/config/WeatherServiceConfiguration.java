@@ -2,6 +2,7 @@ package io.github.musius.config;
 
 import com.google.common.collect.Lists;
 import io.github.musius.service.util.WeatherCrawler;
+import io.github.musius.service.util.YahooWeatherCrawler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +22,8 @@ public class WeatherServiceConfiguration {
     }
 
     @Bean
-    public List<WeatherCrawler> crawlers() {
-        return Lists.newArrayList();
+    public List<WeatherCrawler> crawlers(YahooWeatherCrawler yahooCrawler) {
+        return Lists.newArrayList(yahooCrawler);
     }
 
     @Bean

@@ -1,9 +1,11 @@
 package io.github.musius.service;
 
+import io.github.musius.domain.WeatherData;
 import io.github.musius.repository.WeatherDataRepository;
 import io.github.musius.service.util.WeatherCrawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,15 +25,10 @@ public class WeatherCrawlerService {
     WeatherDataRepository repo;
 
     public void populateDatabaseWithWeatherInformation() {
-        /*for (AbstractWeatherClient client : crawlers) {
-            for (Map.Entry<String, WeatherDto> entry : client.getWeatherDataForAllCities().entrySet()) {
-                WeatherDto weatherDto = entry.getValue();
-                WeatherData weatherData = new WeatherData();
-                weatherData.setLastupDate(weatherDto.getDate());
-                weatherData.setTemperature(weatherDto.getTemp());
-                repo.save(weatherData);
-            }
-        }*/
+        for (WeatherCrawler crawler : crawlers) {
+            WeatherData weatherData = crawler.getDataForCity("yekaterinburg");
+            log.debug(weatherData.toString());
+        }
     }
 
     @Scheduled(fixedDelayString = "${service.weather.fixed_delay_seconds}000")

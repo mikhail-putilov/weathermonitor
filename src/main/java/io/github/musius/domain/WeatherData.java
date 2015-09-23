@@ -1,5 +1,7 @@
 package io.github.musius.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.github.musius.domain.util.CustomDateTimeDeserializer;
@@ -15,6 +17,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "WEATHER_DATA")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherData implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
