@@ -28,7 +28,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="entry in weatherData">
+            <tr si-sortable ng-repeat="entry in weatherData">
                 <td class="text-muted">#{{ entry.id }}</td>
                 <td><strong>{{ entry.temperatureCelsius }}°C</strong></td>
                 <td>{{ entry.date | date }}</td>

@@ -4,4 +4,4 @@ service.weather:
     # [{city name}|,{country code}]   @see ISO 3166 country codes
     - yekaterinburg
     - chicago,il
-  fixed_delay_seconds: 20
+  fixed_delay_seconds: 10
