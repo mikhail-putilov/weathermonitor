@@ -6,9 +6,9 @@ import io.github.musius.repository.WeatherDataRepository;
 import io.github.musius.service.util.WeatherCrawler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -18,26 +18,34 @@ import java.util.List;
 public class WeatherCrawlerService {
     private final Logger log = LoggerFactory.getLogger(WeatherCrawlerService.class);
 
-    @Resource
+    @Autowired
     List<WeatherCrawler> crawlers;
     @Resource
     List<String> cities;
     @Inject
     WeatherDataRepository repo;
 
-    public void populateDatabaseWithWeatherInformation() {
+    public void populateDatabaseWithNewWeatherInformation() {
         List<WeatherData> toBeSaved = Lists.newArrayList();
         for (String city : cities) {
             for (WeatherCrawler crawler : crawlers) {
-                WeatherData data = crawler.getDataForCity(city);
-                toBeSaved.add(data);
+                tryCrawlDataOrSilence(toBeSaved, city, crawler);
             }
         }
         repo.save(toBeSaved);
     }
 
+    private void tryCrawlDataOrSilence(List<WeatherData> toBeSaved, String city, WeatherCrawler crawler) {
+        try {
+            WeatherData data = crawler.getDataForCity(city);
+            toBeSaved.add(data);
+        } catch (Exception e) {
+            log.error("Failed to crawl data from {} for city '{}'", crawler.getSupportedDataSourceUri(), city);
+        }
+    }
+
     @Scheduled(fixedDelayString = "${service.weather.fixed_delay_seconds}000")
     void autoPopulateDatabaseWithFixedDelay() {
-        populateDatabaseWithWeatherInformation();
+        populateDatabaseWithNewWeatherInformation();
     }
 }

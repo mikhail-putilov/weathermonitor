@@ -1,6 +1,5 @@
 package io.github.musius.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -31,9 +30,16 @@ public class WeatherData implements Serializable {
     private DateTime date;
 
     @NotNull
-    @Min(value = 0)
-    @Column(name = "temperature", nullable = false)
-    private Double temperature;
+    @Column(name = "temperatureCelsius", nullable = false)
+    private Double temperatureCelsius;
+
+    @NotNull
+    @Column(name = "cityName", nullable = false)
+    private String cityName;
+
+    @NotNull
+    @Column(name = "dataSourceUri", nullable = false)
+    private String dataSourceUri;
 
     public Long getId() {
         return id;
@@ -51,12 +57,28 @@ public class WeatherData implements Serializable {
         this.date = date;
     }
 
-    public Double getTemperature() {
-        return temperature;
+    public Double getTemperatureCelsius() {
+        return temperatureCelsius;
     }
 
-    public void setTemperature(Double temperature) {
-        this.temperature = temperature;
+    public void setTemperatureCelsius(Double temperatureCelsius) {
+        this.temperatureCelsius = temperatureCelsius;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getDataSourceUri() {
+        return dataSourceUri;
+    }
+
+    public void setDataSourceUri(String dataSourceUri) {
+        this.dataSourceUri = dataSourceUri;
     }
 
     @Override
@@ -84,7 +106,7 @@ public class WeatherData implements Serializable {
         return "WeatherData{" +
                 "id=" + id +
                 ", date='" + date + "'" +
-                ", temperature='" + temperature + "'" +
+                ", temperatureCelsius='" + temperatureCelsius + "'" +
                 '}';
     }
 }

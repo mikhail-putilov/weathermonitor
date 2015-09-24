@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="siTableExampleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>weather</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/si-table.min.js"></script>
+    <script src="scripts/app.js"></script>
+</head>
+<body>
+<div class="container">
+
+    <div ng-controller="WeatherController">
+
+        <div class="page-header">
+            <h1>Погода с Yahoo и OpenWeatherMap</h1>
+        </div>
+
+        <table class="table" si-table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Температура</th>
+                <th>Дата</th>
+                <th>Город</th>
+                <th>Источник</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="entry in weatherData">
+                <td class="text-muted">#{{ entry.id }}</td>
+                <td><strong>{{ entry.temperatureCelsius }}°C</strong></td>
+                <td>{{ entry.date | date }}</td>
+                <td>{{ entry.cityName }}</td>
+                <td>{{ entry.dataSourceUri }}</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <si-table-pagination limit="10"/>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+
+        <div class="alert alert-info" ng-if="!weatherData">
+            Загрузка ...
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

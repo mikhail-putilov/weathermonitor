@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
@@ -22,13 +23,7 @@ public class WeatherServiceConfiguration {
     }
 
     @Bean
-    public List<WeatherCrawler> crawlers(YahooWeatherCrawler yahooCrawler) {
-        return Lists.newArrayList(yahooCrawler);
-    }
-
-    @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-
 }
