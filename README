@@ -1,3 +1,5 @@
 # Тестовое задание centre-it
 Погода берется с Openweathermap и Yahoo
 настройки находятся в application.yml
+
+Запустить можно через mvn spring-boot:run 
