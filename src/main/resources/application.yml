@@ -2,6 +2,7 @@ spring.velocity.checkTemplateLocation: false
 service.weather:
   cities:
     # [{city name}|,{country code}]   @see ISO 3166 country codes
-    - yekaterinburg
+    - moscow
     - chicago,il
+    - yekaterinburg
   fixed_delay_seconds: 10
